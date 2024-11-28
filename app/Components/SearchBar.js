@@ -1,3 +1,9 @@
+/**
+ * The SearchBar component in React renders a search input field with a search icon on the right side.
+ * @returns The SearchBar component is being returned. It consists of an input field with a placeholder
+ * "SEARCH HERE" and a search icon from the FaSearch component. The input field has specific styling
+ * classes applied to it for appearance and functionality.
+ */
 import React from "react";
 import { FaSearch } from "react-icons/fa";
 

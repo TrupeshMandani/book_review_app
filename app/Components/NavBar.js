@@ -1,3 +1,4 @@
+// The code you provided is a React functional component called `NavBar`.
 import React from "react";
 
 const NavBar = () => {
