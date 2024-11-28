@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
+  --background: hsl(0, 0%, 100%);
   --foreground: #171717;
 }
 
@@ -16,9 +16,12 @@
 
 body {
   color: var(--foreground);
-  background: var(--background);
+  background: black; /* Keep the background black */
   font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
 }
+
 .brutalist-container {
   position: relative;
   width: 250px;
@@ -199,4 +202,73 @@ body {
   50% {
     border-color: #4a90e2;
   }
+}
+.brutalist-navbar {
+  background-color: var(--background);
+  color: var(--foreground);
+  border: 4px solid var(--foreground);
+  box-shadow: 5px 5px 0 var(--foreground), 10px 10px 0 #4a90e2;
+  font-family: monospace;
+  padding: 10px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-brand {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 15px;
+}
+
+.navbar-item {
+  text-decoration: none;
+  color: var(--foreground);
+  font-weight: bold;
+  font-size: 18px;
+  transition: all 0.3s ease-in-out;
+}
+
+.navbar-item:hover {
+  color: #4a90e2;
+  text-decoration: underline;
+}
+
+.navbar-item:active {
+  transform: scale(0.95);
+}
+.main-container {
+  background-color: black;
+  color: white;
+  min-height: 100vh; /* Ensures full-page height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-search-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%; /* Makes NavBar stretch across the width */
+  padding: 0 20px; /* Adds some padding for spacing */
+}
+
+.brutalist-navbar {
+  flex: 1; /* Makes NavBar extend fully */
+  margin-right: 20px; /* Spacing between NavBar and SearchBar */
+}
+
+.brutalist-container {
+  max-width: 300px; /* Limits the width of the SearchBar */
 }
