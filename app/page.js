@@ -1,6 +1,5 @@
 import NavBar from "./Components/NavBar";
 import SearchBar from "./Components/SearchBar";
-export const fetchCache = "force-no-store";
 
 export default function Home() {
   return (
