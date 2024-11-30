@@ -7,19 +7,29 @@
  */
 import NavBar from "./Components/NavBar";
 import SearchBar from "./Components/SearchBar";
+import Footer from "./Components/Footer";
 
 export default function Home() {
   return (
-    <div className="bg-black text-white min-h-screen">
-      <div className="flex justify-between items-start w-full p-4">
-        <div className=" w-full">
-          <NavBar />
-        </div>
-        <div className=" px-5 py-1">
-          <SearchBar />
+    <div className="bg-black text-white min-h-screen flex flex-col justify-between">
+      <div>
+        <div className="flex justify-between items-start w-full p-4">
+          <div className="w-full">
+            <NavBar />
+          </div>
+          <div className="px-5 py-1">
+            <SearchBar />
+          </div>
         </div>
       </div>
+
+      {/* Content Section */}
+      <div className="flex-grow">{/* Add main content here */}</div>
+
+      {/* Footer Section */}
+      <Footer />
     </div>
   );
 }
+
 // correct code
