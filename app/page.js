@@ -8,6 +8,7 @@
 import NavBar from "./Components/NavBar";
 import SearchBar from "./Components/SearchBar";
 import Footer from "./Components/Footer";
+import BookSearch from "./Pages/BookDetailPage";
 
 export default function Home() {
   return (
@@ -24,7 +25,10 @@ export default function Home() {
       </div>
 
       {/* Content Section */}
-      <div className="flex-grow">{/* Add main content here */}</div>
+      <div className="flex-grow">
+        {" "}
+        <BookSearch />
+      </div>
 
       {/* Footer Section */}
       <Footer />
