@@ -37,7 +37,7 @@ const BookSearch = ({ query }) => {
   }, [query]); // Trigger the fetch when the query changes
 
   return (
-    <div className="p-8 bg-gray-100 min-h-screen">
+    <div className="p-8 bg-black min-h-screen">
       {/* Loading State */}
       {loading && <p className="text-center text-blue-500">Loading...</p>}
 

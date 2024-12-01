@@ -6,8 +6,8 @@ const BookCard = ({ book }) => {
   const { buyLink } = saleInfo || {};
 
   return (
-    <div className="bg-white border-4 border-white shadow-[5px_5px_0px_#000,10px_10px_0px_#4a90e2] rounded-lg p-4 flex flex-col justify-between">
-      <div className="flex flex-col items-center">
+    <div className="bg-black border-4 border-white shadow-[5px_5px_0px_#000,10px_10px_0px_#4a90e2]  p-4 flex flex-col justify-between">
+      <div className="flex flex-col items-center mb-4">
         {/* Book Image */}
         {imageLinks?.thumbnail && (
           <img
@@ -17,17 +17,17 @@ const BookCard = ({ book }) => {
           />
         )}
         {/* Book Title */}
-        <h2 className="text-xl font-bold text-center mb-2 text-black">
+        <h2 className="text-2xl font-bold text-white text-center mb-2">
           {title || "No Title"}
         </h2>
         {/* Book Authors */}
         {authors && (
-          <p className="text-sm text-gray-700 text-center mb-2">
+          <p className="text-sm text-gray-400 text-center mb-2">
             {authors.join(", ")}
           </p>
         )}
         {/* Book Description */}
-        <p className="text-sm text-gray-800 mb-4 text-center">
+        <p className="text-sm text-gray-300 mb-4 text-center">
           {description
             ? description.substring(0, 100) + "..."
             : "No description available."}
