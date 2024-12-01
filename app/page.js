@@ -1,16 +1,18 @@
-/**
- * The Home component renders a black background with white text, containing a NavBar and a SearchBar
- * component.
- * @returns The `Home` component is being returned, which contains a black background with white text,
- * a navigation bar (`NavBar` component), and a search bar (`SearchBar` component) displayed side by
- * side.
- */
+"use client";
+import React, { useState } from "react";
 import NavBar from "./Components/NavBar";
 import SearchBar from "./Components/SearchBar";
 import Footer from "./Components/Footer";
-import BookSearch from "./Pages/BookDetailPage";
+import BookSearch from "./Pages/HomePage";
 
 export default function Home() {
+  const [query, setQuery] = useState(""); // State to manage the query
+
+  // Function to handle search input change
+  const handleSearch = (searchQuery) => {
+    setQuery(searchQuery); // Update the query state with the search term
+  };
+
   return (
     <div className="bg-black text-white min-h-screen flex flex-col justify-between">
       <div>
@@ -19,15 +21,16 @@ export default function Home() {
             <NavBar />
           </div>
           <div className="px-5 py-1">
-            <SearchBar />
+            {/* Pass the handleSearch function to SearchBar */}
+            <SearchBar onSearch={handleSearch} />
           </div>
         </div>
       </div>
 
       {/* Content Section */}
       <div className="flex-grow">
-        {" "}
-        <BookSearch />
+        {/* Pass the query to BookSearch */}
+        <BookSearch query={query} />
       </div>
 
       {/* Footer Section */}
@@ -35,5 +38,3 @@ export default function Home() {
     </div>
   );
 }
-
-// correct code
