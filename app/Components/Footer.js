@@ -2,13 +2,13 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="bg-black w-full text-white border-4 border-white shadow-[10px_10px_20px_#000,20px_20px_20px_#4a90e2] font-mono p-8 sticky bottom-0 z-50">
+    <footer className="bg-black w-full text-white border-4 border-white shadow-[10px_10px_20px_#000,20px_20px_20px_#4a90e2] font-mono p-8">
       <div className="flex flex-col lg:flex-row justify-between items-center">
         {/* About Me Section */}
         <div className="lg:text-left text-center lg:w-1/2">
           <h2 className="text-2xl font-bold underline mb-4">About Me</h2>
           <p className="text-lg font-bold">
-            Hi, I'm Trupesh Mandani! I specialize in building intuitive and
+            Hi, I&apos;m Trupesh Mandani! I specialize in building intuitive and
             responsive web applications. My skills include:
           </p>
           <ul className="list-disc list-inside mt-4">
@@ -27,8 +27,10 @@ const Footer = () => {
 
         {/* Let's Connect Section */}
         <div className="mt-6 lg:mt-0 text-center lg:w-1/2">
-          <h2 className="text-2xl font-bold underline mb-4">Let's Connect</h2>
-          <p className="text-lg font-bold">I'd love to hear from you!</p>
+          <h2 className="text-2xl font-bold underline mb-4">
+            Let&apos;s Connect
+          </h2>
+          <p className="text-lg font-bold">I&apos;d love to hear from you!</p>
           <p className="mt-2">
             Email:{" "}
             <a

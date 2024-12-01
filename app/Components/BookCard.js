@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import React from "react";
 
 const BookCard = ({ book }) => {
@@ -10,7 +11,7 @@ const BookCard = ({ book }) => {
       <div className="flex flex-col items-center mb-4">
         {/* Book Image */}
         {imageLinks?.thumbnail && (
-          <img
+          <Image
             src={imageLinks.thumbnail}
             alt={title}
             className="w-48 h-72 object-cover mb-4 rounded-md"
