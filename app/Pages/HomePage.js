@@ -16,17 +16,25 @@ const BookSearch = ({ query }) => {
       setError(null);
 
       try {
+        const apiKey = process.env.NEXT_PUBLIC_API_KEY; // Make sure the API key is set in your .env.local file
+
+        // Make sure the key is valid and exists
+        if (!apiKey) {
+          throw new Error("API key is missing");
+        }
+
         const response = await fetch(
-          `https://www.googleapis.com/books/v1/volumes?q=${query}&key=${process.env.NEXT_PUBLIC_API_KEY}`
+          `https://www.googleapis.com/books/v1/volumes?q=${query}&key=${apiKey}`
         );
         const data = await response.json();
 
         if (data.items) {
-          setBooks(data.items);
+          setBooks(data.items); // Set books data if available
         } else {
-          setBooks([]);
+          setBooks([]); // Set empty if no books found
         }
       } catch (err) {
+        console.error("Error in fetching books:", err.message);
         setError("Failed to fetch books. Please try again later.");
       }
 

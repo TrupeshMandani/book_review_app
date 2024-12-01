@@ -15,6 +15,8 @@ const BookCard = ({ book }) => {
             src={imageLinks.thumbnail}
             alt={title}
             className="w-48 h-72 object-cover mb-4 rounded-md"
+            width={128}
+            height={192}
           />
         )}
         {/* Book Title */}
