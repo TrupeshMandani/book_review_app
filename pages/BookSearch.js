@@ -1,10 +1,10 @@
-// BookSearch.js
 "use client";
 import React, { useState, useEffect } from "react";
 import BookCard from "../app/Components/BookCard"; // Import the BookCard component
 import { fetchBooks } from "../app/utils/FetchAPI"; // Import the fetchBooks function
 
-const BookSearch = ({ query }) => {
+const BookSearch = ({ query = "" }) => {
+  // Default query to an empty string if it's undefined or null
   const [books, setBooks] = useState([]); // To store the fetched books
   const [loading, setLoading] = useState(false); // Loading state
   const [error, setError] = useState(null); // Error state
@@ -18,9 +18,9 @@ const BookSearch = ({ query }) => {
       setError(null);
 
       try {
-        const apiKey = process.env.NEXT_PUBLIC_API_KEY; // Make sure the API key is set in your .env.local file
+        const apiKey = process.env.NEXT_PUBLIC_API_KEY; // Ensure the API key is set in your .env.local file
 
-        // Make sure the key is valid and exists
+        // Check for the API key
         if (!apiKey) {
           throw new Error("API key is missing");
         }
@@ -28,7 +28,7 @@ const BookSearch = ({ query }) => {
         const fetchedBooks = await fetchBooks(query, apiKey); // Fetch books using the function from FetchAPI.js
         setBooks(fetchedBooks); // Set books data
       } catch (err) {
-        console.error("Error in fetching books:", err.message);
+        console.error("Error fetching books:", err.message);
         setError("Failed to fetch books. Please try again later.");
       }
 
@@ -36,7 +36,7 @@ const BookSearch = ({ query }) => {
     };
 
     getBooks();
-  }, [query]); // Trigger the fetch when the query changes
+  }, [query]); // Trigger fetch when the query changes
 
   return (
     <div className="p-8 bg-black min-h-screen">
