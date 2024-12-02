@@ -1,7 +1,7 @@
 // The code you provided is a React functional component called `NavBar`.
 import React from "react";
 
-const NavBar = () => {
+export const NavBar = () => {
   return (
     <nav className="bg-black w-full text-white border-4 border-white shadow-[5px_5px_0px_#000,10px_10px_0px_#4a90e2] font-mono p-4 sticky top-0 z-50">
       <div className="flex justify-between items-center">
@@ -31,6 +31,5 @@ const NavBar = () => {
   );
 };
 
-export default NavBar;
 // Correct code
 // Just to push the code
