@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { NavBar } from "./Components/NavBar";
 import SearchBar from "./Components/SearchBar";
 import Footer from "./Components/Footer";
-import BookSearch from "./pages/BookSearch";
+import BookSearch from "../pages/BookSearch";
 
 export default function Home() {
   const [query, setQuery] = useState(""); // State to manage the query

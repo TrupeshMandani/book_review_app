@@ -1,4 +1,5 @@
 // The code you provided is a React functional component called `NavBar`.
+import Link from "next/link";
 import React from "react";
 
 export const NavBar = () => {
@@ -19,12 +20,12 @@ export const NavBar = () => {
           >
             Books
           </a>
-          <a
-            href="#authors"
+          <Link
+            href="/authors" // Correct path to navigate to the authors page
             className="text-white font-bold text-lg transition-all duration-300 ease-in-out hover:text-blue-400 hover:underline"
           >
             Authors
-          </a>
+          </Link>
         </div>
       </div>
     </nav>

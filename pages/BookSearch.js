@@ -1,7 +1,8 @@
-// thisis working corrrect code
+// BookSearch.js
 "use client";
 import React, { useState, useEffect } from "react";
-import BookCard from "../Components/BookCard"; // Import the BookCard component
+import BookCard from "../app/Components/BookCard"; // Import the BookCard component
+import { fetchBooks } from "../app/utils/FetchAPI"; // Import the fetchBooks function
 
 const BookSearch = ({ query }) => {
   const [books, setBooks] = useState([]); // To store the fetched books
@@ -12,7 +13,7 @@ const BookSearch = ({ query }) => {
   useEffect(() => {
     if (query.trim() === "") return; // Skip fetching if query is empty
 
-    const fetchBooks = async () => {
+    const getBooks = async () => {
       setLoading(true);
       setError(null);
 
@@ -24,16 +25,8 @@ const BookSearch = ({ query }) => {
           throw new Error("API key is missing");
         }
 
-        const response = await fetch(
-          `https://www.googleapis.com/books/v1/volumes?q=${query}&key=${apiKey}`
-        );
-        const data = await response.json();
-
-        if (data.items) {
-          setBooks(data.items); // Set books data if available
-        } else {
-          setBooks([]); // Set empty if no books found
-        }
+        const fetchedBooks = await fetchBooks(query, apiKey); // Fetch books using the function from FetchAPI.js
+        setBooks(fetchedBooks); // Set books data
       } catch (err) {
         console.error("Error in fetching books:", err.message);
         setError("Failed to fetch books. Please try again later.");
@@ -42,13 +35,19 @@ const BookSearch = ({ query }) => {
       setLoading(false);
     };
 
-    fetchBooks();
+    getBooks();
   }, [query]); // Trigger the fetch when the query changes
 
   return (
     <div className="p-8 bg-black min-h-screen">
       {/* Loading State */}
-      {loading && <p className="text-center text-blue-500">Loading...</p>}
+      {loading && (
+        <div className="loader justify-center mx-auto">
+          <span className="bar"></span>
+          <span className="bar"></span>
+          <span className="bar"></span>
+        </div>
+      )}
 
       {/* Error State */}
       {error && <p className="text-center text-red-500">{error}</p>}
