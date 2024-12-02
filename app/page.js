@@ -4,10 +4,12 @@ import { NavBar } from "./Components/NavBar";
 import SearchBar from "./Components/SearchBar";
 import Footer from "./Components/Footer";
 import BookSearch from "./pages/BookSearch";
+import { connection } from "next/server";
 
-export default function Home() {
+export default async function Home() {
   const [query, setQuery] = useState(""); // State to manage the query
-
+  await connection;
+  const value = process.env.NEXT_PUBLIC_API_KEY;
   // Function to handle search input change
   const handleSearch = (searchQuery) => {
     setQuery(searchQuery); // Update the query state with the search term
