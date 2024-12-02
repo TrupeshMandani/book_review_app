@@ -1,4 +1,5 @@
 "use client";
+
 import Image from "next/image";
 import React from "react";
 
@@ -6,14 +7,27 @@ const BookCard = ({ book }) => {
   const { title, authors, description, imageLinks, saleInfo } = book.volumeInfo;
   const { buyLink } = saleInfo || {};
 
+  // Function to handle PDF search
+  const handleSearchPDF = () => {
+    if (title) {
+      const searchQuery = `${title} filetype:pdf`;
+      const searchURL = `https://www.google.com/search?q=${encodeURIComponent(
+        searchQuery
+      )}`;
+      window.open(searchURL, "_blank");
+    } else {
+      alert("No title available to search for PDFs.");
+    }
+  };
+
   return (
-    <div className="bg-black border-4 border-white shadow-[5px_5px_0px_#000,10px_10px_0px_#4a90e2]  p-4 flex flex-col justify-between">
+    <div className="bg-black border-4 border-white shadow-[5px_5px_0px_#000,10px_10px_0px_#4a90e2] p-4 flex flex-col justify-between h-full">
       <div className="flex flex-col items-center mb-4">
         {/* Book Image */}
         {imageLinks?.thumbnail && (
           <Image
             src={imageLinks.thumbnail}
-            alt={title}
+            alt={title || "Book cover image"}
             className="w-48 h-72 object-cover mb-4 rounded-md"
             width={128}
             height={192}
@@ -37,28 +51,31 @@ const BookCard = ({ book }) => {
         </p>
       </div>
 
-      {/* Buy Link and Price */}
-      {buyLink ? (
-        <div className="mt-4 flex flex-col items-center">
-          {saleInfo.listPrice && saleInfo.listPrice.amount && (
-            <p className="text-lg font-bold text-blue-500 mb-2">
-              ${saleInfo.listPrice.amount}
-            </p>
-          )}
-          <a
-            href={buyLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition-all duration-300"
-          >
-            Buy this Book
-          </a>
-        </div>
-      ) : (
-        <p className="text-center text-gray-500 mt-4">
-          Not available for purchase
-        </p>
-      )}
+      {/* Buttons Container */}
+      <div className="flex flex-col gap-3 mt-auto">
+        <button
+          onClick={() => {
+            if (title) {
+              const amazonSearchURL = `https://www.amazon.com/s?k=${encodeURIComponent(
+                title
+              )}`;
+              window.open(amazonSearchURL, "_blank");
+            } else {
+              alert("No title available to search on Amazon.");
+            }
+          }}
+          className="bg-black text-white border-2 border-white py-2 px-4 hover:bg-blue-500 hover:border-blue-500 hover:text-white transition-all m-3 duration-300 shadow-[5px_5px_0px_#000,10px_10px_0px_#4a90e2]"
+        >
+          Purchase on Amazon
+        </button>
+
+        <button
+          onClick={handleSearchPDF}
+          className="bg-black text-white border-2 border-white py-2 px-4 hover:bg-blue-500 hover:border-blue-500 hover:text-white transition-all m-3 duration-300 shadow-[5px_5px_0px_#000,10px_10px_0px_#4a90e2]"
+        >
+          Read / Download E-Book
+        </button>
+      </div>
     </div>
   );
 };
