@@ -17,17 +17,30 @@ const fetchBooks = async (query, apiKey) => {
 };
 
 // utils/FetchAPI.js
-const fetchAuthors = async () => {
+const fetchAuthors = async (authorName, apiKey) => {
   try {
     const response = await fetch(
-      "https://www.googleapis.com/books/v1/volumes?q=inauthor:${authorName}&key=${apiKey}"
+      `https://www.googleapis.com/books/v1/volumes?q=inauthor:${authorName}&key=${apiKey}`
     );
     const data = await response.json();
 
-    if (data.authors) {
-      return data.authors; // Return authors data if available
+    if (data.items) {
+      // Extract relevant data from the response
+      const authors = data.items.map((item) => {
+        const volumeInfo = item.volumeInfo;
+        return {
+          id: item.id,
+          name: volumeInfo.authors ? volumeInfo.authors[0] : "Unknown Author",
+          biography: volumeInfo.description || "No biography available",
+          imageUrl: volumeInfo.imageLinks
+            ? volumeInfo.imageLinks.thumbnail
+            : null,
+          books: volumeInfo.title ? [volumeInfo.title] : [], // Add more books if available
+        };
+      });
+      return authors; // Return the structured authors data
     } else {
-      return []; // Return empty array if no authors found
+      return []; // Return an empty array if no authors found
     }
   } catch (err) {
     throw new Error("Error fetching authors: " + err.message);
