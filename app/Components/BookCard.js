@@ -11,10 +11,10 @@ const BookCard = ({ book }) => {
   const handleSearchPDF = () => {
     if (title) {
       const searchQuery = `${title} filetype:pdf`;
-      const searchURL = `https://www.google.com/search?q=${encodeURIComponent(
+      const luckySearchURL = `https://www.google.com/search?btnI=I&q=${encodeURIComponent(
         searchQuery
       )}`;
-      window.open(searchURL, "_blank");
+      window.open(luckySearchURL, "_blank");
     } else {
       alert("No title available to search for PDFs.");
     }
