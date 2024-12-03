@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { NavBar } from "./Components/NavBar";
+import NavBar from "./Components/NavBar";
 import SearchBar from "./Components/SearchBar";
 import Footer from "./Components/Footer";
 import BookSearch from "../pages/BookSearch";
