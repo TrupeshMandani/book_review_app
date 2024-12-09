@@ -1,17 +1,25 @@
-"use client";
-import React from "react";
+import React, { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 
 const SearchBar = ({ onSearch }) => {
+  const [searchTerm, setSearchTerm] = useState("");
+
   const handleChange = (e) => {
-    onSearch(e.target.value); // Call onSearch with the query as user types
+    const value = e.target.value;
+    setSearchTerm(value);
+    // Debounce the search to call `onSearch` after 300ms of inactivity
+    clearTimeout(window.debounceTimeout);
+    window.debounceTimeout = setTimeout(() => {
+      onSearch(value); // Call onSearch after the user stops typing
+    }, 300);
   };
 
   return (
     <div className="relative w-[250px] mx-auto">
       <input
         placeholder="SEARCH HERE"
-        onChange={handleChange} // Update query on change
+        value={searchTerm}
+        onChange={handleChange}
         className="w-full p-4 pr-12 text-xl font-bold text-black bg-white border-4 border-black outline-none transition-all duration-300 ease-in-out shadow-[5px_5px_0px_#000,10px_10px_0px_#4a90e2]"
         type="text"
       />

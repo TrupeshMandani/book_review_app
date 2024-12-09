@@ -4,6 +4,7 @@ import NavBar from "./Components/NavBar";
 import SearchBar from "./Components/SearchBar";
 import Footer from "./Components/Footer";
 import BookSearch from "../pages/BookSearch";
+import HomePage from "./homepage/page";
 
 export default function Home() {
   const [query, setQuery] = useState(""); // State to manage the query
@@ -29,8 +30,23 @@ export default function Home() {
 
       {/* Content Section */}
       <div className="flex-grow">
-        {/* Pass the query to BookSearch */}
-        <BookSearch query={query} />
+        {query.trim() ? (
+          <div>
+            {/* Search results section */}
+            <h2 className="text-3xl text-center mt-8 text-white font-mono font-bold">
+              Search Results
+            </h2>
+            <BookSearch query={query} />
+          </div>
+        ) : (
+          <div>
+            {/* Recommended Books section */}
+            <h2 className="text-3xl text-center mt-8 text-white font-mono font-bold">
+              Recommended Books
+            </h2>
+            <HomePage />
+          </div>
+        )}
       </div>
 
       {/* Footer Section */}
