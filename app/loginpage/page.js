@@ -122,7 +122,7 @@ const Login = () => {
           {/* Add sign up option */}
         </div>
         <div className="flex justify-center gap-2 pt-2">
-          Don't have an account?{" "}
+          Don&apos;t have an account?{" "}
           <Link
             href="/signup"
             className="text-white font-bold  transition-all duration-300 ease-in-out hover:text-blue-400 hover:underline"

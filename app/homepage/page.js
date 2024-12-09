@@ -106,7 +106,7 @@ const HomePage = ({ query = "" }) => {
       {/* No Results */}
       {!loading && books.length === 0 && query.trim() === "" && category && (
         <p className="text-center text-gray-500 mt-4">
-          No books found in the "{category}" category.
+          No books found in the &quot;{category}&quot; category.
         </p>
       )}
       {!loading && books.length === 0 && query.trim() !== "" && (
