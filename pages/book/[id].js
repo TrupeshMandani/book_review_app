@@ -33,7 +33,7 @@ const BookDetailPage = () => {
 
       fetchBookDetails();
     }
-  }, [id]);
+  }, [apiKey, id]);
 
   // Fetch reviews for the book from Firestore
   useEffect(() => {
