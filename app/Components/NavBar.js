@@ -44,12 +44,12 @@ const NavBar = () => {
       <div className="flex justify-between items-center">
         <div className="text-2xl font-bold">Bookstore</div>
         <div className="flex gap-4">
-          <a
-            href="#home"
+          <Link
+            href="/"
             className="text-white font-bold text-lg transition-all duration-300 ease-in-out hover:text-blue-400 hover:underline"
           >
             Home
-          </a>
+          </Link>
           <a
             href="#books"
             className="text-white font-bold text-lg transition-all duration-300 ease-in-out hover:text-blue-400 hover:underline"

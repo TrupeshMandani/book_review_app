@@ -41,9 +41,7 @@ export default function Home() {
         ) : (
           <div>
             {/* Recommended Books section */}
-            <h2 className="text-3xl text-center mt-8 text-white font-mono font-bold">
-              Recommended Books
-            </h2>
+
             <HomePage />
           </div>
         )}

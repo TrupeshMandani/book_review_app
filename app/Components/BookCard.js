@@ -21,7 +21,7 @@ const BookCard = ({ book }) => {
   };
 
   return (
-    <div className="bg-black border-4 border-white shadow-[5px_5px_0px_#000,10px_10px_0px_#4a90e2] p-4 flex flex-col justify-between h-full">
+    <div className="bg-black border-4 border-white align-middle transform transition-transform duration-300 hover:scale-105 focus:scale-105 active:scale-105 hover:shadow-[5px_5px_0px_#000,10px_10px_0px_#4a90e2] p-4 flex flex-col justify-between h-full">
       <div className="flex flex-col items-center mb-4">
         {/* Book Image */}
         {imageLinks?.thumbnail && (
@@ -64,14 +64,14 @@ const BookCard = ({ book }) => {
               alert("No title available to search on Amazon.");
             }
           }}
-          className="bg-black text-white border-2 border-white py-2 px-4 hover:bg-blue-500 hover:border-blue-500 hover:text-white transition-all m-3 duration-300 shadow-[5px_5px_0px_#000,10px_10px_0px_#4a90e2]"
+          className="bg-black text-white border-2 border-white py-2 px-4 hover:bg-white hover:text-black transition-all m-3 duration-300 hover:shadow-[5px_5px_0px_#000,10px_10px_0px_#4a90e2]"
         >
           Purchase on Amazon
         </button>
 
         <button
           onClick={handleSearchPDF}
-          className="bg-black text-white border-2 border-white py-2 px-4 hover:bg-blue-500 hover:border-blue-500 hover:text-white transition-all m-3 duration-300 shadow-[5px_5px_0px_#000,10px_10px_0px_#4a90e2]"
+          className="bg-black text-white border-2 border-white py-2 px-4 hover:bg-white hover:text-black  transition-all m-3 duration-300 hover:shadow-[5px_5px_0px_#000,10px_10px_0px_#4a90e2]"
         >
           Read / Download E-Book
         </button>
