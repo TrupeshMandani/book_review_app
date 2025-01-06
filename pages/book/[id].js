@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { db } from "../../app/utils/firebase"; // Firestore instance
-import { collection, getDocs } from "firebase/firestore"; // Firestore imports
+import { collection, getDocs, addDoc } from "firebase/firestore"; // Firestore imports
 import { fetchBooks } from "../../app/utils/FetchAPI"; // Import fetchBooks from utils
 import Image from "next/image"; // Import Image for optimized images
+import { FaStar } from "react-icons/fa";
 
 const BookDetailPage = () => {
   const router = useRouter();
@@ -13,6 +14,10 @@ const BookDetailPage = () => {
   const [loading, setLoading] = useState(true);
   const [showFullDescription, setShowFullDescription] = useState(false); // Added state for description toggle
   const apiKey = process.env.NEXT_PUBLIC_API_KEY; // Add your API key here
+  const [userRating, setUserRating] = useState(0);
+  const [averageRating, setAverageRating] = useState(0);
+  const [newReview, setNewReview] = useState("");
+  const [readingStatus, setReadingStatus] = useState("none"); // 'none', 'reading', 'completed', 'want-to-read'
 
   // Fetch the book details from the API (Google Books)
   useEffect(() => {
@@ -60,6 +65,86 @@ const BookDetailPage = () => {
     }
   }, [book, reviews]);
 
+  const StarRating = ({ rating, onRatingChange }) => {
+    return (
+      <div className="flex space-x-1">
+        {[...Array(5)].map((_, index) => (
+          <FaStar
+            key={index}
+            className={`cursor-pointer ${
+              index < rating ? "text-yellow-400" : "text-gray-400"
+            }`}
+            onClick={() => onRatingChange(index + 1)}
+          />
+        ))}
+      </div>
+    );
+  };
+
+  const handleSubmitReview = async (e) => {
+    e.preventDefault();
+    if (!newReview.trim()) return;
+
+    try {
+      const reviewRef = collection(db, "books", id, "reviews");
+      await addDoc(reviewRef, {
+        text: newReview,
+        rating: userRating,
+        userId: "user-id", // Replace with actual user ID
+        createdAt: new Date().toISOString(),
+      });
+
+      setNewReview("");
+      setUserRating(0);
+      // Refresh reviews
+      fetchReviews();
+    } catch (error) {
+      console.error("Error submitting review:", error);
+    }
+  };
+
+  const ReadingStatusSelector = () => {
+    return (
+      <select
+        value={readingStatus}
+        onChange={(e) => setReadingStatus(e.target.value)}
+        className="mt-4 p-2 rounded-md bg-gray-700 text-white"
+      >
+        <option value="none">Set reading status...</option>
+        <option value="reading">Currently Reading</option>
+        <option value="completed">Completed</option>
+        <option value="want-to-read">Want to Read</option>
+      </select>
+    );
+  };
+
+  const ShareButtons = () => {
+    const shareUrl = typeof window !== "undefined" ? window.location.href : "";
+
+    return (
+      <div className="flex space-x-4 mt-4">
+        <button
+          onClick={() =>
+            window.open(`https://twitter.com/intent/tweet?url=${shareUrl}`)
+          }
+          className="px-4 py-2 bg-blue-400 rounded-md hover:bg-blue-500"
+        >
+          Share on Twitter
+        </button>
+        <button
+          onClick={() =>
+            window.open(
+              `https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`
+            )
+          }
+          className="px-4 py-2 bg-blue-600 rounded-md hover:bg-blue-700"
+        >
+          Share on Facebook
+        </button>
+      </div>
+    );
+  };
+
   return (
     <div className="p-6 max-w-screen-lg mx-auto">
       {loading ? (
@@ -78,6 +163,7 @@ const BookDetailPage = () => {
                   height={288}
                 />
               )}
+              <ReadingStatusSelector />
               {/* Book Title */}
               <h1 className="text-3xl font-bold text-white text-center mb-4">
                 {book.volumeInfo?.title || "No Title"}
@@ -103,6 +189,33 @@ const BookDetailPage = () => {
                   </button>
                 )}
 
+              <div className="mt-4 flex flex-col items-center">
+                <p className="text-white mb-2">Rate this book:</p>
+                <StarRating
+                  rating={userRating}
+                  onRatingChange={setUserRating}
+                />
+              </div>
+
+              <form
+                onSubmit={handleSubmitReview}
+                className="w-full max-w-md mt-6"
+              >
+                <textarea
+                  value={newReview}
+                  onChange={(e) => setNewReview(e.target.value)}
+                  className="w-full p-2 rounded-md bg-gray-700 text-white"
+                  placeholder="Write your review..."
+                  rows="4"
+                />
+                <button
+                  type="submit"
+                  className="mt-2 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+                >
+                  Submit Review
+                </button>
+              </form>
+
               {/* Reviews Section */}
               <h3 className="text-2xl font-semibold text-white mt-6 mb-4">
                 Reviews
@@ -121,6 +234,27 @@ const BookDetailPage = () => {
                   No reviews yet. Be the first to review!
                 </p>
               )}
+
+              <ShareButtons />
+
+              <div className="grid grid-cols-2 gap-4 mt-4 text-white">
+                <div>
+                  <p className="font-bold">Published Date:</p>
+                  <p>{book.volumeInfo?.publishedDate || "Unknown"}</p>
+                </div>
+                <div>
+                  <p className="font-bold">Page Count:</p>
+                  <p>{book.volumeInfo?.pageCount || "Unknown"}</p>
+                </div>
+                <div>
+                  <p className="font-bold">Categories:</p>
+                  <p>{book.volumeInfo?.categories?.join(", ") || "Unknown"}</p>
+                </div>
+                <div>
+                  <p className="font-bold">Publisher:</p>
+                  <p>{book.volumeInfo?.publisher || "Unknown"}</p>
+                </div>
+              </div>
             </div>
           ) : (
             <p className="text-white text-center">Book not found!</p>

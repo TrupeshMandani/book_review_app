@@ -12,6 +12,7 @@ import {
   signOut, // Import signOut function
 } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
+import { collection, getDocs, addDoc } from "firebase/firestore";
 
 // Your Firebase configuration
 const firebaseConfig = {
