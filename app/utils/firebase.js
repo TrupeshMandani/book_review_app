@@ -1,3 +1,4 @@
+// This is the fire base setup file to setup the login and authentication in the website
 // app/utils/firebase.js
 import { initializeApp } from "firebase/app";
 import {
