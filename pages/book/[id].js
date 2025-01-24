@@ -1,3 +1,4 @@
+// This is the ID page like this page will tell the system to what to show based on the id of the book or ID of the author
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { db } from "../../app/utils/firebase"; // Firestore instance
