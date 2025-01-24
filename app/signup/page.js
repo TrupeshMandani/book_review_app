@@ -1,3 +1,4 @@
+// this is the sign up page for user when they havent logged in to the web site 
 "use client";
 import React, { useState } from "react";
 import { auth, createUserWithEmailAndPassword } from "../utils/firebase"; // Import firebase functions
