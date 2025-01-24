@@ -1,3 +1,4 @@
+// This is the code to fetch the API from google API which is used to show the books in the main page and whole website 
 // utils/FetchAPI.js
 const fetchBooks = async (query, apiKey) => {
   try {
